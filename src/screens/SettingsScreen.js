@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, TextInput, Modal } from 'react-native';
 import { useSmoke } from '../context/SmokeContext';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientText from '../components/GradientText';
 
 export default function SettingsScreen() {
   const { settings, updateSettings, resetAllData } = useSmoke();
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalType, setModalType] = useState(''); // 'price' or 'goal'
+  const [modalType, setModalType] = useState('');
   const [inputValue, setInputValue] = useState('');
 
   const openModal = (type) => {
@@ -65,49 +67,91 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
+        {/* Preferences Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Preferences</Text>
+          <GradientText
+            colors={['#40ffaa', '#4079ff', '#40ffaa']}
+            style={styles.sectionTitle}
+          >
+            Preferences
+          </GradientText>
           
           <TouchableOpacity 
-            style={styles.settingItem}
             onPress={() => openModal('price')}
           >
-            <Text style={styles.settingLabel}>Cigarette Price</Text>
-            <View style={styles.settingRight}>
-              <Text style={styles.settingValue}>MVR {settings.cigarettePrice.toFixed(2)}</Text>
-              <Text style={styles.editIcon}>✏️</Text>
-            </View>
+            <LinearGradient
+              colors={['#1a1a1a', '#2a2a2a']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.settingItem}
+            >
+              <Text style={styles.settingLabel}>Cigarette Price</Text>
+              <View style={styles.settingRight}>
+                <Text style={styles.settingValue}>MVR {settings.cigarettePrice.toFixed(2)}</Text>
+                <Text style={styles.editIcon}>✏️</Text>
+              </View>
+            </LinearGradient>
           </TouchableOpacity>
 
           <TouchableOpacity 
-            style={styles.settingItem}
             onPress={() => openModal('goal')}
           >
-            <Text style={styles.settingLabel}>Daily Goal</Text>
-            <View style={styles.settingRight}>
-              <Text style={styles.settingValue}>{settings.dailyGoal} cigarettes</Text>
-              <Text style={styles.editIcon}>✏️</Text>
-            </View>
+            <LinearGradient
+              colors={['#1a1a1a', '#2a2a2a']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.settingItem}
+            >
+              <Text style={styles.settingLabel}>Daily Goal</Text>
+              <View style={styles.settingRight}>
+                <Text style={styles.settingValue}>{settings.dailyGoal} cigarettes</Text>
+                <Text style={styles.editIcon}>✏️</Text>
+              </View>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
 
+        {/* Data Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Data</Text>
-          
-          <TouchableOpacity 
-            style={[styles.settingItem, styles.dangerItem]}
-            onPress={handleResetData}
+          <GradientText
+            colors={['#ff6b6b', '#ff4040', '#ff6b6b']}
+            style={styles.sectionTitle}
           >
-            <Text style={styles.dangerText}>Reset All Data</Text>
+            Data
+          </GradientText>
+          
+          <TouchableOpacity onPress={handleResetData}>
+            <LinearGradient
+              colors={['#2a1a1a', '#3a1a1a']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={[styles.settingItem, styles.dangerItem]}
+            >
+              <Text style={styles.dangerText}>Reset All Data</Text>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
 
+        {/* About Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>About</Text>
-          <Text style={styles.aboutText}>
-            Smoke Tracker helps you monitor your smoking habits and work towards quitting.
-          </Text>
-          <Text style={styles.version}>Version 1.0.0</Text>
+          <GradientText
+            colors={['#40ffaa', '#4079ff', '#40ffaa']}
+            style={styles.sectionTitle}
+          >
+            About
+          </GradientText>
+          
+          <LinearGradient
+            colors={['#1a1a1a', '#2a2a2a']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.aboutCard}
+          >
+            <Text style={styles.aboutText}>
+              Puffless helps you monitor your smoking habits and work towards quitting.
+            </Text>
+            <Text style={styles.version}>Version 1.0.0</Text>
+          </LinearGradient>
         </View>
       </View>
 
@@ -119,7 +163,10 @@ export default function SettingsScreen() {
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
+          <LinearGradient
+            colors={['#1a1a1a', '#2a2a2a']}
+            style={styles.modalContent}
+          >
             <Text style={styles.modalTitle}>
               {modalType === 'price' ? 'Edit Cigarette Price' : 'Edit Daily Goal'}
             </Text>
@@ -130,24 +177,33 @@ export default function SettingsScreen() {
               onChangeText={setInputValue}
               keyboardType="numeric"
               placeholder={modalType === 'price' ? 'Enter price in MVR' : 'Enter number of cigarettes'}
+              placeholderTextColor="#666"
             />
 
             <View style={styles.modalButtons}>
               <TouchableOpacity 
-                style={[styles.modalButton, styles.cancelButton]}
                 onPress={() => setModalVisible(false)}
               >
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <LinearGradient
+                  colors={['#2a2a2a', '#3a3a3a']}
+                  style={styles.modalButton}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </LinearGradient>
               </TouchableOpacity>
 
-              <TouchableOpacity 
-                style={[styles.modalButton, styles.saveButton]}
-                onPress={handleSave}
-              >
-                <Text style={styles.saveButtonText}>Save</Text>
+              <TouchableOpacity onPress={handleSave}>
+                <LinearGradient
+                  colors={['#40ffaa', '#4079ff']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.modalButton}
+                >
+                  <Text style={styles.saveButtonText}>Save</Text>
+                </LinearGradient>
               </TouchableOpacity>
             </View>
-          </View>
+          </LinearGradient>
         </View>
       </Modal>
     </ScrollView>
@@ -157,7 +213,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0a0a0a',
   },
   content: {
     padding: 20,
@@ -167,22 +223,21 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
     marginBottom: 15,
-    color: '#333',
   },
   settingItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
   },
   settingLabel: {
     fontSize: 16,
-    color: '#333',
+    color: '#ccc',
   },
   settingRight: {
     flexDirection: 'row',
@@ -191,63 +246,66 @@ const styles = StyleSheet.create({
   },
   settingValue: {
     fontSize: 16,
-    color: '#FF6B6B',
+    color: '#40ffaa',
     fontWeight: '600',
   },
   editIcon: {
     fontSize: 18,
   },
   dangerItem: {
-    backgroundColor: '#FFE5E5',
+    borderColor: '#ff6b6b',
   },
   dangerText: {
     fontSize: 16,
-    color: '#FF6B6B',
+    color: '#ff6b6b',
     fontWeight: '600',
+  },
+  aboutCard: {
+    padding: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
   },
   aboutText: {
     fontSize: 14,
-    color: '#666',
+    color: '#888',
     lineHeight: 20,
     marginBottom: 10,
   },
   version: {
     fontSize: 12,
-    color: '#999',
+    color: '#666',
   },
   // Modal styles
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: '#fff',
     borderRadius: 20,
     padding: 25,
     width: '85%',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#333',
+    color: '#fff',
     textAlign: 'center',
   },
   input: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#1a1a1a',
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#2a2a2a',
+    color: '#fff',
   },
   modalButtons: {
     flexDirection: 'row',
@@ -259,16 +317,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
-  cancelButton: {
-    backgroundColor: '#f5f5f5',
-  },
   cancelButtonText: {
-    color: '#666',
+    color: '#ccc',
     fontSize: 16,
     fontWeight: '600',
-  },
-  saveButton: {
-    backgroundColor: '#FF6B6B',
   },
   saveButtonText: {
     color: '#fff',

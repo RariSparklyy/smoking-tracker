@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ActivityIndicator, Animated } from 'react-native';
 import { useSmoke } from '../context/SmokeContext';
 import { getTodayLogs, getWeekLogs, calculateMoneySpent } from '../utils/calculations';
+import GradientText from '../components/GradientText';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeScreen() {
   const { logs, settings, addSmokeLog, removeLog, loading } = useSmoke();
@@ -12,7 +14,6 @@ export default function HomeScreen() {
   const weekLogs = getWeekLogs(logs);
   const moneySpent = calculateMoneySpent(todayLogs, settings.cigarettePrice);
 
-  // Toast notification animation
   useEffect(() => {
     if (showToast) {
       Animated.sequence([
@@ -58,7 +59,6 @@ export default function HomeScreen() {
           text: 'Remove',
           style: 'destructive',
           onPress: async () => {
-            // Get the most recent log (first in the array since they're sorted newest first)
             const mostRecentLog = todayLogs[0];
             const success = await removeLog(mostRecentLog.id);
             if (!success) {
@@ -73,7 +73,7 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={[styles.container, styles.centerContent]}>
-        <ActivityIndicator size="large" color="#FF6B6B" />
+        <ActivityIndicator size="large" color="#40ffaa" />
         <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
@@ -81,21 +81,40 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Toast Notification */}
       {showToast && (
         <Animated.View style={[styles.toast, { opacity: fadeAnim }]}>
-          <Text style={styles.toastIcon}>✓</Text>
-          <Text style={styles.toastText}>Cigarette logged successfully</Text>
+          <LinearGradient
+            colors={['#40ffaa', '#4079ff']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.toastGradient}
+          >
+            <Text style={styles.toastIcon}>✓</Text>
+            <Text style={styles.toastText}>Cigarette logged successfully</Text>
+          </LinearGradient>
         </Animated.View>
       )}
 
-      <Text style={styles.title}>Today's Count</Text>
+      <GradientText
+        colors={['#40ffaa', '#4079ff', '#40ffaa']}
+        style={styles.title}
+      >
+        Today's Count
+      </GradientText>
+
       <Text style={styles.count}>{todayLogs.length}</Text>
       <Text style={styles.subtitle}>cigarettes</Text>
       
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.logButton} onPress={handleLogSmoke}>
-          <Text style={styles.logButtonText}>Log Smoke</Text>
+        <TouchableOpacity onPress={handleLogSmoke}>
+          <LinearGradient
+            colors={['#40ffaa', '#4079ff']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.logButton}
+          >
+            <Text style={styles.logButtonText}>Log Smoke</Text>
+          </LinearGradient>
         </TouchableOpacity>
 
         <TouchableOpacity 
@@ -108,9 +127,12 @@ export default function HomeScreen() {
       </View>
 
       {todayLogs.length > 0 && todayLogs.length >= settings.dailyGoal && (
-        <View style={styles.warningBox}>
+        <LinearGradient
+          colors={['#ff6b6b22', '#ff6b6b44']}
+          style={styles.warningBox}
+        >
           <Text style={styles.warningText}>⚠️ You've reached your daily goal!</Text>
-        </View>
+        </LinearGradient>
       )}
 
       <View style={styles.statsContainer}>
@@ -128,12 +150,15 @@ export default function HomeScreen() {
         <Text style={styles.goalText}>
           Daily Goal: {settings.dailyGoal} cigarettes
         </Text>
-        <View style={styles.progressBar}>
-          <View 
+        <View style={styles.progressBarContainer}>
+          <LinearGradient
+            colors={['#40ffaa', '#4079ff']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
             style={[
-              styles.progressFill, 
+              styles.progressFill,
               { width: `${Math.min((todayLogs.length / settings.dailyGoal) * 100, 100)}%` }
-            ]} 
+            ]}
           />
         </View>
       </View>
@@ -144,7 +169,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0a0a0a',
     alignItems: 'center',
     padding: 20,
   },
@@ -154,23 +179,21 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 10,
     fontSize: 16,
-    color: '#666',
+    color: '#888',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginTop: 40,
-    color: '#333',
   },
   count: {
     fontSize: 80,
     fontWeight: 'bold',
-    color: '#FF6B6B',
+    color: '#40ffaa',
     marginVertical: 20,
   },
   subtitle: {
     fontSize: 18,
-    color: '#666',
+    color: '#888',
     marginBottom: 40,
   },
   buttonContainer: {
@@ -179,15 +202,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   logButton: {
-    backgroundColor: '#FF6B6B',
     paddingHorizontal: 50,
     paddingVertical: 15,
     borderRadius: 25,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   logButtonText: {
     color: '#fff',
@@ -195,45 +212,37 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   undoButton: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#1a1a1a',
     width: 50,
     height: 50,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#FF6B6B',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    borderColor: '#40ffaa',
   },
   undoButtonDisabled: {
-    borderColor: '#ccc',
+    borderColor: '#333',
     opacity: 0.5,
   },
   undoButtonText: {
-    color: '#FF6B6B',
+    color: '#40ffaa',
     fontSize: 28,
     fontWeight: 'bold',
   },
   toast: {
     position: 'absolute',
-    top: 3,
+    top: 10,
     left: 20,
     right: 20,
-    backgroundColor: '#4CAF50',
-    padding: 15,
+    zIndex: 1000,
     borderRadius: 10,
+    overflow: 'hidden',
+  },
+  toastGradient: {
+    padding: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    zIndex: 1000,
   },
   toastIcon: {
     color: '#fff',
@@ -248,15 +257,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   warningBox: {
-    backgroundColor: '#FFF3CD',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
     borderLeftWidth: 4,
-    borderLeftColor: '#FFA500',
+    borderLeftColor: '#ff6b6b',
   },
   warningText: {
-    color: '#856404',
+    color: '#ff6b6b',
     fontSize: 14,
     fontWeight: '600',
   },
@@ -266,20 +274,22 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   statBox: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#1a1a1a',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
     minWidth: 150,
+    borderWidth: 1,
+    borderColor: '#2a2a2a',
   },
   statValue: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FF6B6B',
+    color: '#40ffaa',
   },
   statLabel: {
     fontSize: 14,
-    color: '#666',
+    color: '#888',
     marginTop: 5,
   },
   goalContainer: {
@@ -288,18 +298,17 @@ const styles = StyleSheet.create({
   },
   goalText: {
     fontSize: 16,
-    color: '#666',
+    color: '#888',
     marginBottom: 10,
     textAlign: 'center',
   },
-  progressBar: {
+  progressBarContainer: {
     height: 10,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#1a1a1a',
     borderRadius: 5,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#FF6B6B',
   },
 });
