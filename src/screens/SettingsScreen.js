@@ -10,7 +10,7 @@ export default function SettingsScreen() {
           
           <TouchableOpacity style={styles.settingItem}>
             <Text style={styles.settingLabel}>Cigarette Price</Text>
-            <Text style={styles.settingValue}>$0.50</Text>
+            <Text style={styles.settingValue}>MVR 15.00</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.settingItem}>

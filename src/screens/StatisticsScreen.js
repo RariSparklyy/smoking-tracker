@@ -21,7 +21,7 @@ export default function StatisticsScreen() {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Money Spent</Text>
-          <Text style={styles.cardValue}>$0.00</Text>
+          <Text style={styles.cardValue}>MVR 0.00</Text>
           <Text style={styles.cardSubtitle}>this month</Text>
         </View>
       </View>

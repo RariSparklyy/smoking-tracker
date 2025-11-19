@@ -18,7 +18,7 @@ export default function HomeScreen() {
           <Text style={styles.statLabel}>This Week</Text>
         </View>
         <View style={styles.statBox}>
-          <Text style={styles.statValue}>$0.00</Text>
+          <Text style={styles.statValue}>MVR 0.00</Text>
           <Text style={styles.statLabel}>Money Spent</Text>
         </View>
       </View>
