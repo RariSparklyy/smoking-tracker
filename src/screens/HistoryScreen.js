@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, Animated } f
 import { useSmoke } from '../context/SmokeContext';
 import { formatTime, formatDate } from '../utils/calculations';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Feather } from '@expo/vector-icons';
 
 // Simple animated list item component
 const AnimatedLogItem = ({ item, onDelete, delay = 0 }) => {
@@ -37,7 +38,7 @@ const AnimatedLogItem = ({ item, onDelete, delay = 0 }) => {
       ]}
     >
       <View style={styles.logIcon}>
-        <Text style={styles.logIconText}>🚬</Text>
+        <Feather name="wind" size={24} color="#40ffaa" />
       </View>
       
       <View style={styles.logInfo}>
@@ -49,7 +50,7 @@ const AnimatedLogItem = ({ item, onDelete, delay = 0 }) => {
         style={styles.deleteButton}
         onPress={() => onDelete(item)}
       >
-        <Text style={styles.deleteButtonText}>✕</Text>
+        <Feather name="trash-2" size={18} color="#ff6b6b" />
       </TouchableOpacity>
     </Animated.View>
   );
@@ -91,7 +92,7 @@ export default function HistoryScreen() {
 
   const renderEmpty = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyIcon}>📋</Text>
+      <Feather name="file-text" size={60} color="#333" style={styles.emptyIcon} />
       <Text style={styles.emptyTitle}>No logs yet</Text>
       <Text style={styles.emptyText}>
         Start tracking by logging your first cigarette from the Home screen.
@@ -199,9 +200,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 15,
   },
-  logIconText: {
-    fontSize: 24,
-  },
+  // logIconText removed
   logInfo: {
     flex: 1,
   },
@@ -225,16 +224,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ff6b6b',
   },
-  deleteButtonText: {
-    color: '#ff6b6b',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+  // deleteButtonText removed
   emptyContainer: {
     alignItems: 'center',
   },
   emptyIcon: {
-    fontSize: 60,
     marginBottom: 20,
   },
   emptyTitle: {

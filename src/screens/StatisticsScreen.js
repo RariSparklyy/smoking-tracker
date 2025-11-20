@@ -4,6 +4,7 @@ import { useSmoke } from '../context/SmokeContext';
 import { getMonthLogs, calculateMoneySpent, calculateDailyAverage, getTodayLogs, getWeekLogs } from '../utils/calculations';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '../components/GradientText';
+import { Feather } from '@expo/vector-icons';
 
 export default function StatisticsScreen() {
   const { logs, settings } = useSmoke();
@@ -128,9 +129,12 @@ export default function StatisticsScreen() {
             end={{ x: 1, y: 0 }}
             style={styles.infoGradient}
           >
-            <Text style={styles.infoText}>
-              📊 You've been tracking for {daysSinceStart} {daysSinceStart === 1 ? 'day' : 'days'}
-            </Text>
+            <View style={styles.iconRow}>
+              <Feather name="bar-chart-2" size={20} color="#40ffaa" style={styles.icon} />
+              <Text style={styles.infoText}>
+                You've been tracking for {daysSinceStart} {daysSinceStart === 1 ? 'day' : 'days'}
+              </Text>
+            </View>
           </LinearGradient>
         </View>
 
@@ -143,7 +147,10 @@ export default function StatisticsScreen() {
               end={{ x: 1, y: 0 }}
               style={styles.motivationGradient}
             >
-              <Text style={styles.motivationTitle}>💪 Keep Going!</Text>
+              <View style={styles.motivationHeader}>
+                <Feather name="trending-up" size={22} color="#40ffaa" style={styles.icon} />
+                <Text style={styles.motivationTitle}>Keep Going!</Text>
+              </View>
               <Text style={styles.motivationText}>
                 {dailyAverage < settings.dailyGoal 
                   ? `Great job! You're averaging ${dailyAverage} cigarettes per day, below your goal of ${settings.dailyGoal}.`
@@ -237,15 +244,26 @@ const styles = StyleSheet.create({
   motivationGradient: {
     padding: 20,
   },
+  motivationHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   motivationTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#40ffaa',
-    marginBottom: 10,
   },
   motivationText: {
     fontSize: 14,
     color: '#ccc',
     lineHeight: 20,
+  },
+  iconRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 10,
   },
 });

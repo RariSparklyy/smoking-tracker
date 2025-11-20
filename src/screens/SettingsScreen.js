@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, TextInput,
 import { useSmoke } from '../context/SmokeContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '../components/GradientText';
+import { Feather } from '@expo/vector-icons';
 
 export default function SettingsScreen() {
   const { settings, updateSettings, resetAllData } = useSmoke();
@@ -88,7 +89,7 @@ export default function SettingsScreen() {
               <Text style={styles.settingLabel}>Cigarette Price</Text>
               <View style={styles.settingRight}>
                 <Text style={styles.settingValue}>MVR {settings.cigarettePrice.toFixed(2)}</Text>
-                <Text style={styles.editIcon}>✏️</Text>
+                <Feather name="edit-2" size={18} color="#666" />
               </View>
             </LinearGradient>
           </TouchableOpacity>
@@ -105,7 +106,7 @@ export default function SettingsScreen() {
               <Text style={styles.settingLabel}>Daily Goal</Text>
               <View style={styles.settingRight}>
                 <Text style={styles.settingValue}>{settings.dailyGoal} cigarettes</Text>
-                <Text style={styles.editIcon}>✏️</Text>
+                <Feather name="edit-2" size={18} color="#666" />
               </View>
             </LinearGradient>
           </TouchableOpacity>
@@ -249,9 +250,7 @@ const styles = StyleSheet.create({
     color: '#40ffaa',
     fontWeight: '600',
   },
-  editIcon: {
-    fontSize: 18,
-  },
+  // editIcon style removed as it's no longer needed for SVG icons
   dangerItem: {
     borderColor: '#ff6b6b',
   },
