@@ -1,23 +1,26 @@
 
 # PUFFLESS
 
-A React Native mobile application designed to help users track their smoking habits, monitor progress, and gradually work toward reducing or quitting.
+Puffless is a React Native mobile application designed to help users track their smoking habits, monitor progress, and gradually work toward reducing or quitting.
 
 
 ## 1. Project Description
 
-Smoking Tracker is a lightweight, user-friendly mobile application built with React Native.
-It enables users to:
+Puffless is a lightweight mobile application built with React Native suitable for users who want a clean and distraction-free smoke-tracking experience.
 
-* Log each cigarette they smoke
-* Track daily, weekly, and monthly habits
-* View statistics and spending
-* Adjust settings such as price-per-pack, daily goals, and cigarette count
-* View a history of all smoke events
-* Stay motivated through clear data visualisation
+Key capabilities include:
 
-The app prioritises simplicity and accessibility, making it suitable for users who want a clean and distraction-free smoke-tracking experience.
+Event Logging: Log each cigarette smoked with a single tap.
 
+Progress Tracking: Monitor daily, weekly, and monthly habits.
+
+Data Visualization: View statistics and financial impact summaries.
+
+Customization: Adjust settings such as price, daily goals, and cigarette count.
+
+History: Review a complete history of all smoke events.
+
+Motivation: Visual feedback to help stay within daily limits.
 
 
 ## 2. Installation and Running the Project
@@ -29,7 +32,7 @@ Ensure the following are installed:
 * Node.js
 * React Native CLI or Expo CLI
 * Android Studio or Xcode (for emulators)
-* A physical device (optional)
+* A physical device for expo GO
 
 
 
@@ -58,7 +61,7 @@ npx react-native run-android
 npx react-native run-ios
 ```
 
-### If using Expo
+### Expo
 
 ```bash
 npx expo start
@@ -76,10 +79,13 @@ A single-tap button to instantly record a new smoke event using global context.
 
 Displays:
 
-* Total smokes
-* Averages
-* Summaries
-* Money spent
+Total cigarettes smoked
+
+Daily averages
+
+Weekly and monthly summaries
+
+Total money spent based on user settings
 
 ### History View
 
@@ -89,10 +95,11 @@ Shows all logged entries with timestamps.
 
 Allows the user to configure:
 
-* Cost per pack
-* Cigarettes per pack
-* Daily goal
+Cigarette price per pack (or unit)
 
+Daily usage goals
+
+Data management (reset functionality)
 
 ### AsyncStorage
 
