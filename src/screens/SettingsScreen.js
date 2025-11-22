@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert, TextInput,
 import { useSmoke } from '../context/SmokeContext';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '../components/GradientText';
-import { Feather } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 
 export default function SettingsScreen() {
   const { settings, updateSettings, resetAllData } = useSmoke();
@@ -129,6 +129,7 @@ export default function SettingsScreen() {
               style={[styles.settingItem, styles.dangerItem]}
             >
               <Text style={styles.dangerText}>Reset All Data</Text>
+              <Ionicons name="trash-outline" size={20} color="#ff6b6b" />
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -183,6 +184,7 @@ export default function SettingsScreen() {
 
             <View style={styles.modalButtons}>
               <TouchableOpacity 
+                style={styles.modalButtonWrapper}
                 onPress={() => setModalVisible(false)}
               >
                 <LinearGradient
@@ -193,7 +195,10 @@ export default function SettingsScreen() {
                 </LinearGradient>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={handleSave}>
+              <TouchableOpacity 
+                style={styles.modalButtonWrapper}
+                onPress={handleSave}
+              >
                 <LinearGradient
                   colors={['#40ffaa', '#4079ff']}
                   start={{ x: 0, y: 0 }}
@@ -250,7 +255,6 @@ const styles = StyleSheet.create({
     color: '#40ffaa',
     fontWeight: '600',
   },
-  // editIcon style removed as it's no longer needed for SVG icons
   dangerItem: {
     borderColor: '#ff6b6b',
   },
@@ -310,11 +314,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  modalButton: {
+  modalButtonWrapper: {
     flex: 1,
-    padding: 15,
+  },
+  modalButton: {
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     borderRadius: 10,
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 50,
   },
   cancelButtonText: {
     color: '#ccc',
