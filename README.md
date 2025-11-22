@@ -118,17 +118,14 @@ Implemented using React Navigation with stack or tab navigation.
 
 ### History Screen
 
-`![History Screen](./screenshots/history.jpg)`
 ![History Screen](./screenshots/history.jpg "History Screen")
 
 ### Statistics Screen
 
-`![Statistics Screen](./screenshots/stats.jpg)`
 ![Statistics Screen](./screenshots/stats.jpg "Stats Screen")
 
 ### Settings Screen
 
-`![Settings Screen](./screenshots/settings.jpg)`
 ![Settings Screen](./screenshots/settings.jpg "Settings Screen")
 
 ---
