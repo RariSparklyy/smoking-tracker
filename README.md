@@ -114,24 +114,22 @@ Implemented using React Navigation with stack or tab navigation.
 
 ### Home Screen
 
-![Home Screen](./screenshots/home.jpg)
 ![Home Screen](./screenshots/home.jpg "Home Screen")
-
-### Navigation Flow
-
-`![Navigation Flow](./screenshots/navigation.jpg)`
 
 ### History Screen
 
 `![History Screen](./screenshots/history.jpg)`
+![History Screen](./screenshots/history.jpg "History Screen")
 
 ### Statistics Screen
 
 `![Statistics Screen](./screenshots/stats.jpg)`
+![Statistics Screen](./screenshots/stats.jpg "Stats Screen")
 
 ### Settings Screen
 
 `![Settings Screen](./screenshots/settings.jpg)`
+![Settings Screen](./screenshots/settings.jpg "Settings Screen")
 
 ---
 
