@@ -114,7 +114,8 @@ Implemented using React Navigation with stack or tab navigation.
 
 ### Home Screen
 
-`![Home Screen](./screenshots/home.jpg)`
+![Home Screen](./screenshots/home.jpg)
+![Home Screen](./screenshots/home.jpg "Home Screen")
 
 ### Navigation Flow
 
