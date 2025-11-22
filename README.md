@@ -157,3 +157,12 @@ smoking-tracker/
         ├── GradientText.js
         └── Additional UI components
 ```
+
+## 6. Components Used
+
+Gradient Text - React Bits
+
+https://www.reactbits.dev/text-animations/gradient-text
+
+Animated List - React Bits
+https://www.reactbits.dev/components/animated-list
