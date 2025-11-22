@@ -1,7 +1,7 @@
 
 # PUFFLESS
 
-Puffless is a React Native mobile application designed to help users track their smoking habits, monitor progress, and gradually work toward reducing or quitting.
+A React Native mobile application designed to help users track their smoking habits, monitor progress, and gradually work toward reducing or quitting.
 
 
 ## 1. Project Description
@@ -31,7 +31,7 @@ Ensure the following are installed:
 
 * Node.js
 * React Native CLI or Expo CLI
-* Android Studio or Xcode (for emulators)
+* Android Studio or Xcode (optional)
 * A physical device for expo GO
 
 
