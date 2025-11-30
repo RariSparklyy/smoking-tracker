@@ -56,7 +56,7 @@ npm install
 npx expo start
 ```
 * Scan the popped up QR code with your camera, which will automatically boot up the project via Expo GO
-Press "a" to access the project on an Android Virtual Machine (If you have installed Android Studio)
+* Alternatively, press "a" to access the project on an Android Virtual Machine (If you have installed Android Studio)
 ---
 
 ## 3. Features
